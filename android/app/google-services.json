@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "532390717132",
+    "project_id": "hr-pulse-f0add",
+    "storage_bucket": "hr-pulse-f0add.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:532390717132:android:ff39624abcacf7892b0469",
+        "android_client_info": {
+          "package_name": "uz.sectorsoft.hrpulse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgEAAK9PYzr8XAW2wva6zqQozejnEm_L8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
