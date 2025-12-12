@@ -194,19 +194,15 @@ class _AskForPermissionSheetState extends State<AskForPermissionSheet> {
     TextEditingController controller, {
     required bool isFrom,
   }) async {
-    final attendance = context.read<ProfileCubit>().state.user?.attendance;
-    final TimeOfDay? workStart = parseDateTimeStringToTimeOfDay(
-      attendance?.wtStart,
-    );
+    // Eski kod: wtStart ni olish
+    // final attendance = context.read<ProfileCubit>().state.user?.attendance;
+    // final TimeOfDay? workStart = parseDateTimeStringToTimeOfDay(attendance?.wtStart);
 
-    if (workStart == null) {
-      showError(context, 'work_time_not_set'.tr());
-      return;
-    }
+    // YANGI: wtStart ni umuman ishlatmaymiz, minimal vaqt 01:00
+    final TimeOfDay defaultStartTime = const TimeOfDay(hour: 1, minute: 0);
 
-    TimeOfDay initialTime = workStart;
-
-    // Agar allaqachon tanlangan bo'lsa
+    // Agar controllerda allaqachon vaqt bo'lsa, uni initial qilamiz
+    TimeOfDay initialTime = defaultStartTime;
     if (controller.text.isNotEmpty) {
       final parsed = _parseTime(controller.text);
       if (parsed != null) initialTime = parsed;
@@ -216,42 +212,39 @@ class _AskForPermissionSheetState extends State<AskForPermissionSheet> {
     TimeOfDay? maximumTime;
 
     if (isFrom) {
-      // From faqat wtStart dan keyin yoki teng bo'lishi mumkin
-      minimumTime = workStart;
-      maximumTime = null; // cheklov yo'q
+      // From uchun: 01:00 dan boshlab
+      minimumTime = const TimeOfDay(hour: 1, minute: 0);
+      maximumTime = null;
     } else {
-      // To tanlayotganda
+      // To uchun: From dan kamida 30 daqiqa keyin
       final fromTime = _fromController.text.isNotEmpty
           ? _parseTime(_fromController.text)
           : null;
 
       if (fromTime != null) {
-        // From dan 30 daqiqa keyin
         int minHour = fromTime.hour;
         int minMinute = fromTime.minute + 30;
         if (minMinute >= 60) {
           minHour += 1;
           minMinute -= 60;
         }
-        minimumTime = TimeOfDay(hour: minHour, minute: minMinute);
-      } else {
-        // Agar From tanlanmagan bo'lsa, wtStart + 30 daqiqa
-        int minHour = workStart.hour;
-        int minMinute = workStart.minute + 30;
-        if (minMinute >= 60) {
-          minHour += 1;
-          minMinute -= 60;
+        // Agar 24:30 dan keyin bo'lsa va soat 23 dan oshsa → 23:59 gacha ruxsat
+        if (minHour >= 24) {
+          minHour = 23;
+          minMinute = 59;
         }
         minimumTime = TimeOfDay(hour: minHour, minute: minMinute);
+      } else {
+        // Agar From tanlanmagan bo'lsa → 01:30 dan
+        minimumTime = const TimeOfDay(hour: 1, minute: 30);
       }
-      maximumTime = null; // To uchun yuqori cheklov yo'q
+      maximumTime = null;
     }
 
-    // initialTime ni cheklovlarga moslashtirish
+    // initialTime ni minimum chegaraga moslashtirish
     if (minimumTime != null) {
       final initMinutes = initialTime.hour * 60 + initialTime.minute;
       final minMinutes = minimumTime.hour * 60 + minimumTime.minute;
-
       if (initMinutes < minMinutes) {
         initialTime = minimumTime;
       }
@@ -278,15 +271,13 @@ class _AskForPermissionSheetState extends State<AskForPermissionSheet> {
       if (isFrom) {
         _fromController.text = formatted;
 
-        // Agar To tanlangan bo'lsa va endi From dan oldinroq bo'lsa → To ni tozalash
+        // To ni tozalash, agar yangi From dan oldinroq bo'lsa
         if (_toController.text.isNotEmpty) {
           final toTime = _parseTime(_toController.text);
           if (toTime != null) {
             final fromMinutes = selected.hour * 60 + selected.minute;
             final toMinutes = toTime.hour * 60 + toTime.minute;
-
             if (toMinutes <= fromMinutes + 29) {
-              // 30 daqiqadan kam bo'lsa
               _toController.clear();
             }
           }

@@ -1,20 +1,21 @@
 class PermissionModel {
   PermissionModel({
-      String? id, 
-      Employee? employee, 
-      dynamic processedBy, 
-      dynamic reason, 
-      String? createdAt, 
-      String? updatedAt, 
-      String? mode, 
-      String? start, 
-      String? end, 
-      bool? paySalary, 
-      String? comment, 
-      String? status, 
-      dynamic processComment, 
-      String? aiExplanation, 
-      dynamic createdBy,}){
+    String? id,
+    Employee? employee,
+    ProcessedBy? processedBy,
+    Reason? reason,
+    String? createdAt,
+    String? updatedAt,
+    String? mode,
+    String? start,
+    String? end,
+    bool? paySalary,
+    String? comment,
+    String? status,
+    String? processComment,
+    String? aiExplanation,
+    dynamic createdBy,
+  }) {
     _id = id;
     _employee = employee;
     _processedBy = processedBy;
@@ -30,13 +31,17 @@ class PermissionModel {
     _processComment = processComment;
     _aiExplanation = aiExplanation;
     _createdBy = createdBy;
-}
+  }
 
   PermissionModel.fromJson(dynamic json) {
     _id = json['id'];
-    _employee = json['employee'] != null ? Employee.fromJson(json['employee']) : null;
-    _processedBy = json['processed_by'];
-    _reason = json['reason'];
+    _employee = json['employee'] != null
+        ? Employee.fromJson(json['employee'])
+        : null;
+    _processedBy = json['processed_by'] != null
+        ? ProcessedBy.fromJson(json['processed_by'])
+        : null;
+    _reason = json['reason'] != null ? Reason.fromJson(json['reason']) : null;
     _createdAt = json['created_at'];
     _updatedAt = json['updated_at'];
     _mode = json['mode'];
@@ -49,10 +54,11 @@ class PermissionModel {
     _aiExplanation = json['ai_explanation'];
     _createdBy = json['created_by'];
   }
+
   String? _id;
   Employee? _employee;
-  dynamic _processedBy;
-  dynamic _reason;
+  ProcessedBy? _processedBy;
+  Reason? _reason;
   String? _createdAt;
   String? _updatedAt;
   String? _mode;
@@ -61,24 +67,38 @@ class PermissionModel {
   bool? _paySalary;
   String? _comment;
   String? _status;
-  dynamic _processComment;
+  String? _processComment;
   String? _aiExplanation;
   dynamic _createdBy;
 
   String? get id => _id;
+
   Employee? get employee => _employee;
-  dynamic get processedBy => _processedBy;
-  dynamic get reason => _reason;
+
+  ProcessedBy? get processedBy => _processedBy;
+
+  Reason? get reason => _reason;
+
   String? get createdAt => _createdAt;
+
   String? get updatedAt => _updatedAt;
+
   String? get mode => _mode;
+
   String? get start => _start;
+
   String? get end => _end;
+
   bool? get paySalary => _paySalary;
+
   String? get comment => _comment;
+
   String? get status => _status;
-  dynamic get processComment => _processComment;
+
+  String? get processComment => _processComment;
+
   String? get aiExplanation => _aiExplanation;
+
   dynamic get createdBy => _createdBy;
 
   Map<String, dynamic> toJson() {
@@ -87,8 +107,12 @@ class PermissionModel {
     if (_employee != null) {
       map['employee'] = _employee?.toJson();
     }
-    map['processed_by'] = _processedBy;
-    map['reason'] = _reason;
+    if (_processedBy != null) {
+      map['processed_by'] = _processedBy?.toJson();
+    }
+    if (_reason != null) {
+      map['reason'] = _reason?.toJson();
+    }
     map['created_at'] = _createdAt;
     map['updated_at'] = _updatedAt;
     map['mode'] = _mode;
@@ -102,30 +126,67 @@ class PermissionModel {
     map['created_by'] = _createdBy;
     return map;
   }
-
 }
 
-class Employee {
-  Employee({
-      String? id, 
-      String? name, 
-      Image? image,}){
+class Reason {
+  Reason({String? id, String? name, String? shortName, bool? isDefault}) {
+    _id = id;
+    _name = name;
+    _shortName = shortName;
+    _isDefault = isDefault;
+  }
+
+  Reason.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _shortName = json['short_name'];
+    _isDefault = json['is_default'];
+  }
+
+  String? _id;
+  String? _name;
+  String? _shortName;
+  bool? _isDefault;
+
+  String? get id => _id;
+
+  String? get name => _name;
+
+  String? get shortName => _shortName;
+
+  bool? get isDefault => _isDefault;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    map['short_name'] = _shortName;
+    map['is_default'] = _isDefault;
+    return map;
+  }
+}
+
+class ProcessedBy {
+  ProcessedBy({String? id, String? name, Image? image}) {
     _id = id;
     _name = name;
     _image = image;
-}
+  }
 
-  Employee.fromJson(dynamic json) {
+  ProcessedBy.fromJson(dynamic json) {
     _id = json['id'];
     _name = json['name'];
     _image = json['image'] != null ? Image.fromJson(json['image']) : null;
   }
+
   String? _id;
   String? _name;
   Image? _image;
 
   String? get id => _id;
+
   String? get name => _name;
+
   Image? get image => _image;
 
   Map<String, dynamic> toJson() {
@@ -137,30 +198,29 @@ class Employee {
     }
     return map;
   }
-
 }
 
 class Image {
-  Image({
-      String? id, 
-      String? file, 
-      String? preview,}){
+  Image({String? id, String? file, String? preview}) {
     _id = id;
     _file = file;
     _preview = preview;
-}
+  }
 
   Image.fromJson(dynamic json) {
     _id = json['id'];
     _file = json['file'];
     _preview = json['preview'];
   }
+
   String? _id;
   String? _file;
   String? _preview;
 
   String? get id => _id;
+
   String? get file => _file;
+
   String? get preview => _preview;
 
   Map<String, dynamic> toJson() {
@@ -170,5 +230,38 @@ class Image {
     map['preview'] = _preview;
     return map;
   }
+}
 
+class Employee {
+  Employee({String? id, String? name, Image? image}) {
+    _id = id;
+    _name = name;
+    _image = image;
+  }
+
+  Employee.fromJson(dynamic json) {
+    _id = json['id'];
+    _name = json['name'];
+    _image = json['image'] != null ? Image.fromJson(json['image']) : null;
+  }
+
+  String? _id;
+  String? _name;
+  Image? _image;
+
+  String? get id => _id;
+
+  String? get name => _name;
+
+  Image? get image => _image;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['id'] = _id;
+    map['name'] = _name;
+    if (_image != null) {
+      map['image'] = _image?.toJson();
+    }
+    return map;
+  }
 }
