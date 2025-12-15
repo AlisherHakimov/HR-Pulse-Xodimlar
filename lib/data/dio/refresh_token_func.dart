@@ -4,12 +4,11 @@ import 'package:dio/dio.dart';
 import 'package:hr_plus/data/di/di_container.dart';
 import 'package:hr_plus/main.dart';
 
-
 Future<void> refreshTokenFunction() async {
   log('accessToken===>${localeStorage.refreshToken}');
   try {
     final response = await sl<Dio>().post(
-      '//auth/refresh',
+      '/auth/refresh',
       data: {'refresh': localeStorage.refreshToken},
       options: Options(
         headers: {

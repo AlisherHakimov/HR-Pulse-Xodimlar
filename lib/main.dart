@@ -95,7 +95,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: OverlaySupport(
         child: MaterialApp(
-          navigatorKey: navigatorKey,
+          navigatorKey: alice.getNavigatorKey(),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
           localizationsDelegates: context.localizationDelegates,

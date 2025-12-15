@@ -61,7 +61,7 @@ class AppButton extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 if (prefix != null) prefix!,
-
+                8.g,
                 FittedBox(
                   child: Text(
                     title,
@@ -70,9 +70,9 @@ class AppButton extends StatelessWidget {
                         titleTextStyle ??
                         TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 16  ,
+                          fontSize: 16,
                           color: titleColor ?? Colors.white,
-                          height: 14/9
+                          height: 14 / 9,
                         ),
                   ),
                 ),

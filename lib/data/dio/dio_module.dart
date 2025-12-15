@@ -27,7 +27,7 @@ abstract class DioModule {
     String baseUrl = 'https://${isTest ? testHost : host}';
     final authorizedDioClient = _createDioClient(baseUrl);
     authorizedDioClient.interceptors.addAll([
-      // alice.getDioInterceptor(),
+      alice.getDioInterceptor(),
       AuthorizedRequestInterceptor(authorizedDioClient),
       RetryInterceptor(
         dio: authorizedDioClient,
@@ -51,7 +51,7 @@ abstract class DioModule {
     String baseUrl = 'https://${isTest ? testHost : host}/';
     final unauthorizedDioClient = _createDioClient(baseUrl);
     unauthorizedDioClient.interceptors.addAll([
-      // alice.getDioInterceptor(),
+      alice.getDioInterceptor(),
       CommonRequestInterceptor(),
       RetryInterceptor(
         dio: unauthorizedDioClient,

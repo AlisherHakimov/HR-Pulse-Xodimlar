@@ -30,7 +30,7 @@ class _MainPageState extends State<MainPage> {
     NotificationService.getFcmToken().then((fcm) {
       if (fcm != null) {
         sl<AuthApi>().updateFcm(fcmToken: fcm, lang: localeStorage.language);
-        // showFcm(fcm);
+        showFcm(fcm);
       }
       log(fcm ?? '');
     });

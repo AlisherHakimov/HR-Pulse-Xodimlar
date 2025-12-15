@@ -44,8 +44,12 @@ class _PermissionsPageState extends State<PermissionsPage> {
                   itemBuilder: (ctx, i) {
                     final status = PermissionStatus.values[i];
                     int count = 0;
-
-                    count = _calculateStatusCounts(status, state.statusCounts!);
+                    if (state.statusCounts != null) {
+                      count = _calculateStatusCounts(
+                        status,
+                        state.statusCounts!,
+                      );
+                    }
 
                     return _filterButton(
                       onTap: () {
@@ -113,7 +117,8 @@ class _PermissionsPageState extends State<PermissionsPage> {
 
       persistentFooterButtons: [
         AppButton(
-          title: '+ ${'ask_for_permission'.tr()}',
+          title: 'ask_for_permission'.tr(),
+          prefix: SvgPicture.asset(Assets.add),
           onTap: () {
             context.read<PermissionCubit>().getReasons();
             AskForPermissionSheet.show(context);
@@ -168,11 +173,13 @@ class _PermissionsPageState extends State<PermissionsPage> {
 int _calculateStatusCounts(PermissionStatus status, StatusCounts counts) {
   switch (status) {
     case PermissionStatus.PENDING:
-      return (counts.pending ?? 0)+ (counts.review ?? 0);
+      return (counts.pending ?? 0) + (counts.review ?? 0);
     case PermissionStatus.APPROVED:
       return (counts.approved ?? 0) + (counts.aiApproved ?? 0);
     case PermissionStatus.REJECTED:
       return (counts.rejected ?? 0) + (counts.aiRejected ?? 0);
+    case PermissionStatus.CREATED:
+      return (counts.created ?? 0);
     case PermissionStatus.ALL:
       return (counts.pending ?? 0) +
           (counts.review ?? 0) +

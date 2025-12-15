@@ -3,6 +3,7 @@ class Assets {
   Assets._();
 
   static const String a = 'assets/icons/A.java';
+  static const String add = 'assets/icons/add.svg';
   static const String appIcon = 'assets/icons/app_icon.jpg';
   static const String appLogo = 'assets/icons/app_logo.png';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';

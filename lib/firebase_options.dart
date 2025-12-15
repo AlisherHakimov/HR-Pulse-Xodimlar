@@ -51,7 +51,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCgEAAK9PYzr8XAW2wva6zqQozejnEm_L8',
-    appId: '1:532390717132:android:ff39624abcacf7892b0469',
+    appId: '1:532390717132:android:eefbf9b2b397dd4b2b0469',
     messagingSenderId: '532390717132',
     projectId: 'hr-pulse-f0add',
     storageBucket: 'hr-pulse-f0add.firebasestorage.app',
@@ -59,7 +59,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyAG2jUuw-v6bZ7lz0p89RhML2QEUr8YUok',
-    appId: '1:532390717132:ios:9f2ed668362c8b1e2b0469',
+    appId: '1:532390717132:ios:9c37f420a736310c2b0469',
     messagingSenderId: '532390717132',
     projectId: 'hr-pulse-f0add',
     storageBucket: 'hr-pulse-f0add.firebasestorage.app',
