@@ -30,16 +30,11 @@ class _MainPageState extends State<MainPage> {
     NotificationService.getFcmToken().then((fcm) {
       if (fcm != null) {
         sl<AuthApi>().updateFcm(fcmToken: fcm, lang: localeStorage.language);
-        showFcm(fcm);
       }
-      log(fcm ?? '');
     });
 
     super.initState();
   }
-
-   showFcm(String fcm) =>
-      showAboutDialog(context: context, children: [SelectableText(fcm)]);
 
   final List<Widget> _screens = [
     HomePage(),
