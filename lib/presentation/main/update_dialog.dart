@@ -12,7 +12,7 @@ bool shouldUpdate = false;
 bool force = false;
 
 Future<void> getAppUpdateResponse() async {
-  final url = Uri.parse('https://api.tictac.sector-soft.ru/api/version/1.0.2');
+  final url = Uri.parse('https://api.tictac.sector-soft.ru/api/version/1.0.3');
 
   try {
     final response = await http.get(url);
