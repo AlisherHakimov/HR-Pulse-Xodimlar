@@ -186,6 +186,7 @@ int _calculateStatusCounts(PermissionStatus status, StatusCounts counts) {
           (counts.approved ?? 0) +
           (counts.aiApproved ?? 0) +
           (counts.rejected ?? 0) +
+          (counts.created ?? 0) +
           (counts.aiRejected ?? 0);
     default:
       return 0;

@@ -38,7 +38,7 @@ class _MainPageState extends State<MainPage> {
     super.initState();
   }
 
-  showFcm(String fcm) =>
+   showFcm(String fcm) =>
       showAboutDialog(context: context, children: [SelectableText(fcm)]);
 
   final List<Widget> _screens = [
