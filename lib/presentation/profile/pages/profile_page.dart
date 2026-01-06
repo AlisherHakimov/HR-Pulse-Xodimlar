@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hr_plus/main.dart';
 import 'package:hr_plus/presentation/auth/pages/login_page.dart';
-import 'package:hr_plus/presentation/language/pages/language_selection_page.dart';
+import 'package:hr_plus/presentation/language/pages/change_language_page.dart';
 
 import 'package:hr_plus/presentation/profile/bloc/profile_cubit.dart';
 import 'package:hr_plus/presentation/profile/pages/permissions_page.dart';
@@ -82,7 +82,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                   ProfileButton(
                     icon: Assets.language,
-                    onTap: () => context.push(LanguageSelectionPage()),
+                    onTap: () => context.push(ChangeLanguagePage()),
                     title: 'change_language',
                   ),
                   ProfileButton(

@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hr_plus/main.dart';
 import 'package:hr_plus/presentation/auth/pages/login_page.dart';
 import 'package:hr_plus/presentation/home/bloc/home_cubit.dart';
+import 'package:hr_plus/presentation/language/pages/select_language_page.dart';
 import 'package:hr_plus/presentation/notifications/bloc/notification_cubit.dart';
 import 'package:hr_plus/presentation/report/bloc/reports_cubit.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
@@ -34,8 +35,12 @@ class _SplashPageState extends State<SplashPage>
       _apiCalls();
     }
     Future.delayed(Duration(milliseconds: 1500)).then((e) {
-      if (!localeStorage.isLoggedIn) {
+      if (localeStorage.isFirstLaunch) {
         localeStorage.setFirstLaunch();
+        pushAndRemoveAll(const SelectLanguagePage());
+        return;
+      }
+      if (!localeStorage.isLoggedIn) {
         pushAndRemoveAll(LoginPage());
       } else {
         pushAndRemoveAll(const MainPage());

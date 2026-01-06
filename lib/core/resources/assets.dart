@@ -4,7 +4,6 @@ class Assets {
 
   static const String a = 'assets/icons/A.java';
   static const String add = 'assets/icons/add.svg';
-  static const String appIcon = 'assets/icons/app_icon.jpg';
   static const String appLogo = 'assets/icons/app_logo.png';
   static const String arrowLeft = 'assets/icons/arrow_left.svg';
   static const String arrowRight = 'assets/icons/arrow_right.svg';
@@ -26,6 +25,7 @@ class Assets {
   static const String home = 'assets/icons/home.svg';
   static const String homeActive = 'assets/icons/home_active.svg';
   static const String icRoundWarning = 'assets/icons/ic_round-warning.svg';
+  static const String langSelection = 'assets/icons/lang_selection.png';
   static const String language = 'assets/icons/language.svg';
   static const String lock = 'assets/icons/lock.svg';
   static const String lockLogo = 'assets/icons/lock_logo.svg';
@@ -46,11 +46,8 @@ class Assets {
   static const String report = 'assets/icons/report.svg';
   static const String reportActive = 'assets/icons/report_active.svg';
   static const String rocket3 = 'assets/icons/rocket_3_.png';
-  static const String ruRU = 'assets/translations/ru-RU.json';
-  static const String splash = 'assets/icons/splash.png';
   static const String taskEmpty = 'assets/icons/task_empty.png';
   static const String upload = 'assets/icons/upload.svg';
-  static const String uzCyrl = 'assets/translations/uz-Cyrl.json';
   static const String uzUZ = 'assets/translations/uz-UZ.json';
   static const String workSchedule = 'assets/icons/work_schedule.svg';
   static const String workScheduleActive = 'assets/icons/work_schedule_active.svg';

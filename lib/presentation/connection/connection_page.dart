@@ -20,7 +20,7 @@ class InternetConnectionScreenState extends State<ConnectionPage> {
   @override
   void initState() {
     super.initState();
-    timer = Timer.periodic(const Duration(seconds: 2), (_) {
+    timer = Timer.periodic(const Duration(seconds: 1), (_) {
       _updateConnectionStatus();
     });
   }
@@ -81,7 +81,6 @@ class InternetConnectionScreenState extends State<ConnectionPage> {
             setState(() {
               isLoading = true;
             });
-            await Future<void>.delayed(const Duration(milliseconds: 300));
             final isConnected = await hasConnection();
             setState(() {
               isLoading = false;

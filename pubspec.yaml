@@ -92,17 +92,13 @@ icons_launcher:
 
 
 flutter_assets_generator:
-  # Optional. Sets the directory of generated localization files. Provided value should be a valid path on uz_pay dir. Default: generated
   output_dir: /core/resources
-  # Optional. Sets whether utomatic monitoring of file changes. Default: true
   auto_detection: true
-  # Optional. Sets file name conversion rules. Default: true
   named_with_parent: false
-  # Optional. Sets the name for the generated localization file. Default: assets
   output_filename: assets
-  # Optional. Sets the name for the generated localization class. Default: Assets
   class_name: Assets
-  # Optional. Sets the filename split pattern for filename split. Default: [-_]
   filename_split_pattern: "[-_]"
-  # Optional. Configuring ignore paths. Default: [],e.g: ["assets/fonts", "assets/images/dark", ...]
-  path_ignore: [ ]
+  path_ignore:
+    - assets/translations/
+    - assets/images/
+    - assets/fonts/

@@ -1,7 +1,5 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hr_plus/main.dart';
-
-import '../../../core/core.dart';
 
 part 'language_state.dart';
 
@@ -14,12 +12,3 @@ class LanguageCubit extends Cubit<LanguageState> {
     emit(state.copyWith(selectedLanguage: languageCode));
   }
 }
-
-// class LocaleChangeNotifier extends ValueNotifier<Locale> {
-//   LocaleChangeNotifier(super.value);
-//
-//   void change(Locale locale) {
-//     value = locale;
-//     notifyListeners();
-//   }
-// }

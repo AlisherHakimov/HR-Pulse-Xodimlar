@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hr_plus/presentation/language/bloc/language_cubit.dart';
 import '../../../core/core.dart';
 
-class LanguageSelectionPage extends StatelessWidget {
-  const LanguageSelectionPage({super.key});
+class ChangeLanguagePage extends StatelessWidget {
+  const ChangeLanguagePage({super.key});
 
   @override
   Widget build(BuildContext context) {
