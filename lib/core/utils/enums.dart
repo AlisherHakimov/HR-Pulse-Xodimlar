@@ -144,3 +144,62 @@ enum ReportType {
     }
   }
 }
+
+enum AttendanceStatus {
+  INWORK(
+    label: 'in_work',
+    color: AppColors.success50,
+    labelColor: AppColors.success500,
+  ),
+  CAMEINTIME(
+    label: 'came_in_time',
+    color: AppColors.primary50,
+    labelColor: AppColors.primary,
+  ),
+  LATE(
+    label: 'late',
+    color: AppColors.warning50,
+    labelColor: AppColors.warning500,
+  ),
+  DIDNTCOME(
+    label: 'didntcome',
+    color: AppColors.destructive50,
+    labelColor: AppColors.destructive500,
+  ),
+  HOLIDAY(
+    label: 'holiday',
+    color: AppColors.primary50,
+    labelColor: AppColors.primary,
+  ),
+  GONE(
+    label: 'gone',
+    color: AppColors.neutral50,
+    labelColor: AppColors.neutral500,
+  ),
+  NOTMARKED(
+    label: 'not_marked',
+    color: AppColors.neutral50,
+    labelColor: AppColors.neutral500,
+  ),
+  NONE(label: '', color: AppColors.neutral50, labelColor: AppColors.neutral500);
+
+  final Color color;
+  final Color labelColor;
+
+  final String label;
+
+  const AttendanceStatus({
+    required this.label,
+    required this.color,
+    required this.labelColor,
+  });
+}
+
+extension AttendanceStatusExtension on String {
+  AttendanceStatus get toAttendanceStatus {
+    return AttendanceStatus.values.firstWhere(
+      (element) => element.name == this,
+      orElse: () => AttendanceStatus.NONE,
+    );
+  }
+}

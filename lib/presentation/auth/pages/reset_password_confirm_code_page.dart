@@ -22,6 +22,8 @@ class _OtpScreenState extends State<ResetPasswordConfirmCodePage> {
   Timer? _timer;
   int _start = 60;
 
+  String? errorMessage;
+
   @override
   void initState() {
     super.initState();
@@ -60,7 +62,11 @@ class _OtpScreenState extends State<ResetPasswordConfirmCodePage> {
     context.read<ResetPasswordCubit>().resetPasswordResendOtp(
       sessionId: widget.sessionId ?? '',
       phoneNumber: widget.phone ?? '',
-      onError: (err) => showError(context, err),
+      onError: (err) {
+        errorMessage = err.tr();
+        _formKey.currentState!.validate();
+        errorMessage = null;
+      },
     );
     _pinController.clear();
   }
@@ -74,7 +80,16 @@ class _OtpScreenState extends State<ResetPasswordConfirmCodePage> {
         onSuccess: () {
           push(NewPasswordPage(sessionId: widget.sessionId ?? ''));
         },
-        onError: (msg) => showError(context, msg),
+        onError: (msg) {
+          if (msg == 'invalid') {
+            errorMessage = 'invalid_pin'.tr();
+          } else {
+            errorMessage = msg.tr();
+          }
+          _pinController.clear();
+          _formKey.currentState!.validate();
+          errorMessage = null;
+        },
       );
     }
   }
@@ -128,6 +143,10 @@ class _OtpScreenState extends State<ResetPasswordConfirmCodePage> {
                 validator: (val) {
                   if (val!.isEmpty) {
                     return 'empty_code'.tr();
+                  }
+
+                  if (errorMessage != null) {
+                    return errorMessage;
                   }
 
                   return null;

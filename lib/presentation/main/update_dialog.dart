@@ -68,7 +68,7 @@ void showUpdateDialog(BuildContext context) {
       actions: [
         Row(
           children: [
-            if (force) ...[
+            if (force != true) ...[
               Expanded(
                 flex: 2,
                 child: AppButton(

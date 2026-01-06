@@ -38,8 +38,14 @@ class _AttendanceSectionState extends State<AttendanceSection> {
 
   void _previousMonth() {
     setState(() {
-      if (selectedDate.year >= 2025 && selectedDate.month > 1) {
-        selectedDate = DateTime(selectedDate.year, selectedDate.month - 1);
+      int firstYear = 2025;
+      if (selectedDate.year >= firstYear) {
+        if (selectedDate.month == 1 && selectedDate.year == firstYear) {
+          return;
+        }
+        selectedDate = selectedDate.month == 1
+            ? DateTime(selectedDate.year - 1, 12)
+            : DateTime(selectedDate.year, selectedDate.month - 1);
         context.read<HomeCubit>().getAttendance(date: selectedDate);
       }
     });
@@ -233,13 +239,25 @@ class AttendanceItem extends StatelessWidget {
                 SvgPicture.asset(Assets.gone),
                 Gap(4),
                 Text(
-                  model.attendance?.checkOut?.substring(11, 16) ??
-                      (model.attendance?.checkIn != null
-                          ? 'not_marked'.tr()
-                          : '--:--'),
+                  model.attendance?.checkOut?.substring(11, 16) ?? '--:--',
                   style: AppTypography.regular14.copyWith(
                     color: AppColors.neutral500,
                     height: 1.5,
+                  ),
+                ),
+                Spacer(),
+                Container(
+                  decoration: BoxDecoration(
+                    color: (model.status ?? '').toAttendanceStatus.color,
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
+                  child: Text(
+                    (model.status ?? '').toAttendanceStatus.label.tr(),
+                    style: AppTypography.regular14.copyWith(
+                      color: (model.status ?? '').toAttendanceStatus.labelColor,
+                      height: 1.5,
+                    ),
                   ),
                 ),
               ],

@@ -22,6 +22,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   @override
   void initState() {
+    context.read<MainCubit>().changeIndex(0);
+
     if (shouldUpdate) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         showUpdateDialog(context);

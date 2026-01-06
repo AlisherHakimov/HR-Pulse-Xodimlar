@@ -34,6 +34,7 @@ class AppColors {
   static const Color destructive700 = Color(0xFFB91C1C);
 
   static const Color success50 = Color(0xFFF0FDF4);
+  static const Color success500 = Color(0xFF22C55E);
   static const Color success700 = Color(0xFF15803D);
 
   static const Color warning50 = Color(0xFFFFFBEB);

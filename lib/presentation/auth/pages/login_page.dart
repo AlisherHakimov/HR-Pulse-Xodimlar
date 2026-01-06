@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                 16.g,
                 Center(
                   child: Text(
-                    'HR PULSE XODIM'.tr(),
+                    'HR PULSE XODIM',
                     style: AppTypography.bold28.copyWith(
                       color: AppColors.neutral800,
                       height: 9 / 7,

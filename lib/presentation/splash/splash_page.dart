@@ -59,8 +59,6 @@ class _SplashPageState extends State<SplashPage>
 
   @override
   Widget build(BuildContext context) {
-
-
     return Scaffold(
       backgroundColor: AppColors.white,
       body: Stack(
@@ -75,13 +73,13 @@ class _SplashPageState extends State<SplashPage>
                 ),
                 16.g,
                 Text(
-                  'HR PULSE'.tr(),
+                  'HR PULSE',
                   style: AppTypography.bold28.copyWith(
                     color: AppColors.neutral800,
                     height: 9 / 7,
                   ),
                 ),
-                Gap(64),
+                64.g,
                 // Image.asset(Assets.splash),
               ],
             ),
