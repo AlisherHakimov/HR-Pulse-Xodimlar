@@ -3,15 +3,18 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:hr_plus/core/core.dart';
 import 'package:hr_plus/main.dart';
+import 'package:hr_plus/presentation/auth/pages/login_page.dart';
 
 import 'check_token_expires.dart';
-
 
 Map<String, String> _headers = {
   HttpHeaders.acceptHeader: 'application/json',
   // Only set content-type when sending JSON bodies; Retrofit may override for forms
 };
+
+bool isLoggedOut = false;
 
 class CommonRequestInterceptor extends QueuedInterceptor {
   CommonRequestInterceptor();
@@ -50,7 +53,12 @@ class CommonRequestInterceptor extends QueuedInterceptor {
     log('Error data: ${err.response?.data}');
     // handler.next(err);
     log('Response data: ');
-    return super.onError(err, handler);
+    if (err.response?.statusCode == HttpStatus.forbidden && !isLoggedOut) {
+      localeStorage.clear();
+      navigatorKey.currentState?.context.pushAndRemoveAll(LoginPage());
+      isLoggedOut = true;
+      return super.onError(err, handler);
+    }
   }
 }
 
@@ -79,6 +87,14 @@ class AuthorizedRequestInterceptor extends CommonRequestInterceptor {
   @override
   Future onError(DioException err, ErrorInterceptorHandler handler) async {
     log('Response data:${err.response?.statusCode} ');
+
+    if (err.response?.statusCode == HttpStatus.forbidden && !isLoggedOut) {
+      localeStorage.clear();
+      navigatorKey.currentState?.context.pushAndRemoveAll(LoginPage());
+      isLoggedOut = true;
+      return super.onError(err, handler);
+    }
+
     if (err.response?.statusCode == HttpStatus.unauthorized) {
       log('Response data:${err.response?.statusCode} ');
       return super.onError(err, handler);

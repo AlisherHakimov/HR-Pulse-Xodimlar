@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hr_plus/core/core.dart';
 import 'package:hr_plus/core/services/notification_service.dart';
+import 'package:hr_plus/data/api/auth_api.dart';
+import 'package:hr_plus/main.dart';
 import 'package:hr_plus/presentation/auth/bloc/login/login_cubit.dart';
 import 'package:hr_plus/presentation/auth/pages/forgot_password_page.dart';
 import 'package:hr_plus/presentation/home/bloc/home_cubit.dart';
@@ -156,6 +158,12 @@ class _LoginPageState extends State<LoginPage> {
           context.read<ProfileCubit>().getMe();
           context.read<HomeCubit>().getAttendance();
           context.read<NotificationCubit>().getNotifications();
+
+          NotificationService.getFcmToken().then((fcm) {
+            if (fcm != null) {
+              sl<AuthApi>().updateFcm(fcmToken: fcm, lang: localeStorage.language);
+            }
+          });
 
           pushAndRemoveAll(MainPage());
         },

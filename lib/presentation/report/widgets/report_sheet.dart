@@ -27,39 +27,41 @@ class ReportSheet extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: SafeArea(
         top: false,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Center(
-              child: Text(
-                'more_details'.tr(),
-                textAlign: TextAlign.center,
-                style: AppTypography.semibold18.copyWith(
-                  color: AppColors.neutral800,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  'more_details'.tr(),
+                  textAlign: TextAlign.center,
+                  style: AppTypography.semibold18.copyWith(
+                    color: AppColors.neutral800,
+                  ),
                 ),
               ),
-            ),
-            12.g,
-            _reportSheetItem(
-              'report_type',
-              (report.type ?? '').toReportType.tr,
-            ),
-            _reportSheetItem(
-              'date',
-              DateFormat(
-                'dd.MM.yyyy',
-              ).format(DateTime.parse(report.time ?? '')),
-            ),
-            _reportSheetItem(
-              'quantity',
-              '${report.amount.toString().moneyFormat} ${'sum'.tr()}',
-            ),
-            _reportSheetItem('description', report.comment ?? '', latest: true),
-            28.g,
-            AppButton(title: 'close'.tr(), onTap: () => Navigator.pop(context)),
-            16.g,
-          ],
+              12.g,
+              _reportSheetItem(
+                'report_type',
+                (report.type ?? '').toReportType.tr,
+              ),
+              _reportSheetItem(
+                'date',
+                DateFormat(
+                  'dd.MM.yyyy',
+                ).format(DateTime.parse(report.time ?? '')),
+              ),
+              _reportSheetItem(
+                'quantity',
+                '${report.amount.toString().moneyFormat} ${'sum'.tr()}',
+              ),
+              _reportSheetItem('description', report.comment ?? '', latest: true),
+              28.g,
+              AppButton(title: 'close'.tr(), onTap: () => Navigator.pop(context)),
+              16.g,
+            ],
+          ),
         ),
       ),
     );
